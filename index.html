@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no' />
+  <meta name='author' content='Henrietha C.N'>
+  <meta name='theme-color' content='#000000' />
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name='description' content='Generatind and Validating pin' />
+  <title>Generate and Validate</title>
+</head>
+
+<style>
+  .display {
+    background-color: #D3BCC0;
+    border-radius: 6%;
+    box-shadow: 0px 3px 10px 0px #472836;
+    width: 280px;
+    height: 490px;
+    border: 1px solid #ccc;
+    margin-left: 38%;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .display {
+      border-radius: 4%;
+      margin-left: 8%;
+      margin-top: 12px;
+    }
+  }
+
+  .button {
+    padding: 0.9em;
+    border-radius: 5px;
+  }
+
+  .generateN {
+    background-color: #472836;
+    width: 120px;
+    height: 75px;
+    margin-top: 55px;
+    border-radius: 6px;
+    margin-left: 15px;
+  }
+
+  .showN {
+    background-color: lemonchiffon;
+    color: #472836;
+    text-align: center;
+    width: 120px;
+    height: 75px;
+    margin-left: 145px;
+    margin-top: -94px;
+    border-radius: 6px;
+  }
+
+  .inputN {
+    background-color: lemonchiffon;
+    width: 120px;
+    height: 65px;
+    margin-left: 15px;
+    border-radius: 6px;
+    margin-top: 70px;
+    color: #472836;
+    font-size: 150%;
+  }
+
+  .validateN {
+    background-color: #472836;
+    width: 120px;
+    height: 75px;
+    margin-left: 145px;
+    border-radius: 6px;
+    margin-top: -90px;
+  }
+
+  .say {
+    background-color: lemonchiffon;
+    width: 200px;
+    height: 50px;
+    margin-left: 45px;
+    border-radius: 6px;
+    margin-top: 65px;
+    text-align: center;
+    color: #472836;
+    font-size: 150%;
+
+  }
+
+  .showP {
+    margin-left: 45px;
+    color: #472836;
+  }
+</style>
+
+<body>
+
+  <div class='display'>
+    <div class='generateN'>
+      <button onclick='generate()' class='button'>Generate Number</button>
+    </div>
+
+    <div class='showN'>
+      <h2><b id='random'></b></h2>
+    </div>
+
+    <div>
+      <input type='text' id='val' class='inputN'><br><i>Input number to validate</i>
+    </div>
+
+    <div class='validateN'>
+      <button onclick='validate()' class='button'>Validate Number</button>
+    </div>
+
+    <div class='say'>
+      <p id='dumpValue'></p>
+    </div>
+    <p class='showP'><i>Shows if Number is valid</i></p>
+  </div>
+
+  <script>
+    function generate() {
+      let rn = Math.floor((Math.random() * 899) + 100);
+      let str = rn.toString();
+
+      let secVal = parseInt(str.charAt(2));
+      let thirdVal = parseInt(str.charAt(1));
+      let fourtVal = parseInt(str.charAt(0));
+
+      let checkDigit = ((secVal * 2) + (thirdVal * 3) + (fourtVal * 4)) % 10;
+
+      let strCheckDigit = checkDigit.toString();
+
+      let uniqueId = str + strCheckDigit;
+      document.getElementById('random').innerHTML = uniqueId;
+
+    }
+
+    function validate() {
+      let val = document.getElementById('val').value;
+      let str = val.toString();
+
+      let firVal = parseInt(str.charAt(3));
+      let secVal = parseInt(str.charAt(2));
+      let thirdVal = parseInt(str.charAt(1));
+      let fourtVal = parseInt(str.charAt(0));
+
+      let checkDigit = ((secVal * 2) + (thirdVal * 3) + (fourtVal * 4)) % 10;
+
+
+      if (firVal === checkDigit) {
+        document.getElementById('dumpValue').innerHTML = 'Valid Code';
+      } else {
+        document.getElementById('dumpValue').innerHTML = 'Invalid Code';
+      }
+    }
+  </script>
+
+</body>
+
+</html>
